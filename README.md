@@ -7,7 +7,7 @@ Course: CE 308
 
 ## Repository Name
 
-`Assignment1_AWS_CE`
+`Saad-AWS`
 
 ## Project Overview
 
