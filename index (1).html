@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UniEvent - University Event Portal</title>
+
+<style>
+
+body{
+font-family: Arial;
+background-color:#f4f4f4;
+text-align:center;
+}
+
+h1{
+color:#2c3e50;
+}
+
+#events{
+margin-top:30px;
+}
+
+.event-card{
+background:white;
+padding:20px;
+margin:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>UniEvent - University Events Portal</h1>
+
+<div id="events"></div>
+
+<script>
+
+const API_KEY = "5ky7GgkhDi76GpKkKbM8gJcvptBhKkch";
+
+const url = "https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=" + API_KEY;
+
+fetch(url)
+.then(response => response.json())
+.then(data => {
+
+let eventsHTML = "";
+
+data._embedded.events.forEach(event => {
+
+eventsHTML += `
+<div class="event-card">
+
+<h2>${event.name}</h2>
+
+<p><b>Date:</b> ${event.dates.start.localDate}</p>
+
+<p><b>Venue:</b> ${event._embedded.venues[0].name}</p>
+
+</div>
+`;
+
+});
+
+document.getElementById("events").innerHTML = eventsHTML;
+
+})
+.catch(error => {
+document.getElementById("events").innerHTML = "Error loading events.";
+});
+
+</script>
+
+</body>
+</html>
